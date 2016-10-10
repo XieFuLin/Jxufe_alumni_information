@@ -1,0 +1,2 @@
+# Jxufe_alumni_information
+江西财经大学校友管理系统
