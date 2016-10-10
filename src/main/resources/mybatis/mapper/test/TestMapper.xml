@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="TestMapper">
+    <!-- 获取数据测试 -->
+    <select id="test" resultType="Map">
+    SELECT * FROM test LIMIT 1
+    </select>
+    <!-- 插入数据测试 -->
+    <insert id="saveTest" parameterType="Map" useGeneratedKeys="true" keyProperty="testId">
+        INSERT INTO test
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            testName
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{testName,jdbcType=VARCHAR}
+        </trim>
+    </insert>
+</mapper>
