@@ -25,10 +25,9 @@ public class CommonRepository implements ICommonRepository {
      */
     private final SqlSessionTemplate sqlSessionTemplate;
 
-
-
     /**
      * 自动注入sqlSessionTemplate.
+     *
      * @param sqlSessionTemplate 从bean中获取的sqlSessionTemplate
      */
     @Autowired
@@ -84,17 +83,19 @@ public class CommonRepository implements ICommonRepository {
     }
 
     /**
-     *  查询集合(利用内存分页).
+     * 查询集合(利用内存分页).
+     *
      * @param statement 查询语句
      * @param parameter 查询条件
      * @param rowBounds 分页显示条件
-     * @param <E> 集合泛型
+     * @param <E>       集合泛型
      * @return 返回集合
      */
     @Override
     public <E> List<E> selectList(final String statement, final Object parameter, final RowBounds rowBounds) {
         return sqlSessionTemplate.selectList(statement, parameter, rowBounds);
     }
+
     /**
      * 查询，将结果作为Map返回.
      *
