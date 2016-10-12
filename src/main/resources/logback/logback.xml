@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <property resource="logback/logback.properties" />
+    <substitutionProperty name="PROJECT_NAME" value="jxufeAlumni"/>
+    <substitutionProperty name="LOG_HOME" value="${monitor.log.home}"/>
+    <substitutionProperty name="DUBBO_LOG_HOME" value="${monitor.log.home}"/>
+
+    <timestamp key="byDate" datePattern="yyyyMMdd" />
+
+    <!-- 保存所有的日志 -->
+    <appender name="dkRolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${PROJECT_NAME1}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${DUBBO_LOG_HOME}/${PROJECT_NAME1}-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+            <!--日志保存天数-->
+            <maxHistory>30</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <MaxFileSize>100MB</MaxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}  [%thread] %-5level %logger{100} - %msg%n</pattern>
+            <immediateFlush>true</immediateFlush>
+        </encoder>
+    </appender>
+    <!--控制台打印-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}  [%thread] %-5level %logger{80} - %msg%n</pattern>
+            <immediateFlush>true</immediateFlush>
+        </encoder>
+    </appender>
+
+    <!--打印sql-->
+    <logger name="org.mybatis.spring.SqlSessionUtils" level="INFO" />
+
+    <logger name="o.m.spring.transaction.SpringManagedTransaction" level="INFO"/>
+    <!--打印某个包下的日志-->
+    <logger name="com.xfl" level="INFO" />
+    <!--打印mybatis事物-->
+    <logger name="org.mybatis.spring.transaction.SpringManagedTransaction" level="INFO" />
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="dkRolling" />
+    </root>
+</configuration>

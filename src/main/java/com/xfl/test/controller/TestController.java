@@ -4,6 +4,8 @@ import com.xfl.common.controller.BaseController;
 import com.xfl.common.entity.Response;
 import com.xfl.common.enumeration.ResponseStatusEnum;
 import com.xfl.test.service.ITestService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/Test")
 public class TestController extends BaseController{
+    private final Logger log = LoggerFactory.getLogger(TestController.class);
     /**
      * 注入Service.
      */
@@ -30,6 +33,7 @@ public class TestController extends BaseController{
      */
     @RequestMapping(method = RequestMethod.GET)
     public Response test() {
+        log.info("Test");
         int count = testService.insertTest();
         return new Response(ResponseStatusEnum.SUCCESS.getCode(), testService.test());
     }
