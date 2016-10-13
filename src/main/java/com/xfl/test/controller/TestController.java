@@ -19,7 +19,10 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/Test")
-public class TestController extends BaseController{
+public class TestController extends BaseController {
+    /**
+     * 日志打印.
+     */
     private final Logger log = LoggerFactory.getLogger(TestController.class);
     /**
      * 注入Service.
