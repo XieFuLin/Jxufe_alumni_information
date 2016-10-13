@@ -24,6 +24,7 @@
         <fastjson.version>1.2.17</fastjson.version>
         <slf4j.version>1.7.21</slf4j.version>
         <c3p0.version>0.9.1.2</c3p0.version>
+        <logback-ext-spring.version>0.1.4</logback-ext-spring.version>
         <junit.version>4.12</junit.version>
         <jdk.version>1.8</jdk.version>
     </properties>
@@ -136,7 +137,7 @@
         <dependency>
             <groupId>org.logback-extensions</groupId>
             <artifactId>logback-ext-spring</artifactId>
-            <version>0.1.4</version>
+            <version>${logback-ext-spring.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
