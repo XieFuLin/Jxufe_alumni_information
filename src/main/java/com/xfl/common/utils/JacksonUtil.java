@@ -2,6 +2,8 @@ package com.xfl.common.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -14,6 +16,10 @@ import java.util.Map;
  * description: Json工具类,使用jackson.
  */
 public class JacksonUtil {
+    /**
+     * 日志打印.
+     */
+    private final Logger log = LoggerFactory.getLogger(JacksonUtil.class);
     /**
      * 自动注入objectMapper,已经配置了该bean.
      */
@@ -30,6 +36,7 @@ public class JacksonUtil {
          try {
              json = objectMapper.writeValueAsString(entity);
          } catch (IOException e) {
+             log.info("Object转json出错" + e.getMessage());
          }
          return json;
     }
@@ -46,6 +53,7 @@ public class JacksonUtil {
         try {
             entity = objectMapper.readValue(json, cls);
         } catch (IOException e) {
+            log.info("json转Object出错" + e.getMessage());
         }
         return entity;
     }
@@ -59,6 +67,7 @@ public class JacksonUtil {
         try {
             json = objectMapper.writeValueAsString(map);
         } catch (IOException e) {
+            log.info("Map转json出错" + e.getMessage());
         }
         return json;
     }
@@ -76,6 +85,7 @@ public class JacksonUtil {
         try {
             map = objectMapper.readValue(mapJson, typeReference);
         } catch (IOException e) {
+            log.info("Json转Map出错" + e.getMessage());
         }
         return map;
     }
@@ -90,6 +100,7 @@ public class JacksonUtil {
         try {
             json = objectMapper.writeValueAsString(list);
         } catch (IOException e) {
+            log.info("List转json出错" + e.getMessage());
         }
         return json;
     }
@@ -106,6 +117,7 @@ public class JacksonUtil {
         try {
             list = objectMapper.readValue(listJson, typeReference);
         } catch (IOException e) {
+            log.info("json转List出错" + e.getMessage());
         }
         return list;
     }
@@ -122,6 +134,7 @@ public class JacksonUtil {
         try {
             entity = objectMapper.readValue(json, typeReference);
         } catch (IOException e) {
+            log.info("json转Type出错" + e.getMessage());
         }
         return entity;
     }
