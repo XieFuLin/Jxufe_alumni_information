@@ -46,6 +46,11 @@
     <logger name="com.xfl" level="DEBUG" />
     <!--打印mybatis事物-->
     <logger name="org.mybatis.spring.transaction.SpringManagedTransaction" level="INFO" />
+    <!--设置定时任务日志的打印级别-->
+    <logger name="org.quartz.impl.jdbcjobstore.JobStoreSupport" level="WARN" />
+    <logger name="org.quartz.impl.jdbcjobstore.JobStoreSupport.clusterRecover"  level="WARN" />
+    <logger name="org.springframework.scheduling.quartz.LocalDataSourceJobStore" level="WARN" />
+    <logger name="org.quartz.core.QuartzSchedulerThread" level="WARN" />
     <!--日志级别-->
     <root level="DEBUG">
         <appender-ref ref="STDOUT" />
