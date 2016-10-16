@@ -2,6 +2,8 @@ package com.xfl.common.controller;
 
 import com.xfl.common.entity.Response;
 import com.xfl.common.enumeration.ResponseStatusEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
+
 
 /**
  * Created by XFL.
@@ -23,7 +24,7 @@ public class BaseController {
     /**
      * 日志对象.
      */
-    private static final Logger logger = LogManager.getLogManager().getLogger("BaseController");
+    private static final Logger logger = LoggerFactory.getLogger(BaseController.class);
     /**
      * 用于获取请求对象的信息.
      */
@@ -38,7 +39,8 @@ public class BaseController {
      */
     @ExceptionHandler
     public final Response exceptionHandler(final Exception e) {
-        logger.info(e.getMessage());
+        logger.info("发生异常", e);
+        logger.info("异常信息: ", e.getMessage());
         return new Response(
                 ResponseStatusEnum.FAILURE.getCode(), "发生异常，请查看日志！");
     }
