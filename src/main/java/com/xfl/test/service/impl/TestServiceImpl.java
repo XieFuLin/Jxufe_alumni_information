@@ -37,7 +37,7 @@ public class TestServiceImpl implements ITestService {
      */
     @Override
     public Integer insertTest() {
-        Map<String,String> parameterMap = new HashMap<>();
+        Map<String, String> parameterMap = new HashMap<>();
         parameterMap.put("testName", "TestName");
         Integer count = commonRepository.insert("TestMapper.saveTest", parameterMap);
       //  int tmp = 1 /0;
