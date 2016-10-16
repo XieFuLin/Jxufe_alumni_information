@@ -12,9 +12,11 @@
         <property name="triggers">
             <list>
                 <ref bean="trigger" />
+                <ref bean="trigger2" />
             </list>
         </property>
     </bean>
+    <bean id="myJobFactory" class="com.xfl.schedule.task.MyJobFactory"/>
     <!--任务-->
     <bean id="jobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
         <property name="jobClass" value="com.xfl.schedule.task.QuartzTestJobBean"/>
@@ -26,5 +28,13 @@
         <property name="jobDetail" ref="jobDetail" />
         <property name="cronExpression" value="0 0/5 * * * ?" />
     </bean>
-    <bean id="myJobFactory" class="com.xfl.schedule.task.MyJobFactory"/>
+    <bean id="jobDetail2" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.xfl.schedule.task.QuartzTest2JobBean"/>
+        <property name="durability" value="true" />
+        <property name="requestsRecovery" value="true" />
+    </bean>
+    <bean id="trigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="jobDetail2" />
+        <property name="cronExpression" value="0 0/5 * * * ?" />
+    </bean>
 </beans>
