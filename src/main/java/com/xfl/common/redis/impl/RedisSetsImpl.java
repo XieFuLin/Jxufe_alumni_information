@@ -1,7 +1,9 @@
 package com.xfl.common.redis.impl;
 
 import com.xfl.common.redis.IRedisSets;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.Assert;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisSentinelPool;
 
@@ -18,6 +20,17 @@ public class RedisSetsImpl implements IRedisSets {
      * JedisSentinelPool.
      */
     private JedisSentinelPool jedisSentinelPool;
+
+    /**
+     * 注入jedisSentinelPool.
+     *
+     * @param jedisSentinelPool 连接池
+     */
+    @Autowired
+    public RedisSetsImpl(JedisSentinelPool jedisSentinelPool) {
+        Assert.notNull(jedisSentinelPool, "redis连接池注入失败");
+        this.jedisSentinelPool = jedisSentinelPool;
+    }
 
     /**
      * 向Set添加多条记录，如果members已存在返回0,否则返回1.

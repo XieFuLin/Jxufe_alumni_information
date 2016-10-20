@@ -29,7 +29,7 @@ public class RedisKeysImpl implements IRedisKeys {
      * @param jedisSentinelPool jedis连接池
      */
     @Autowired
-    private RedisKeysImpl(final JedisSentinelPool jedisSentinelPool){
+    private RedisKeysImpl(final JedisSentinelPool jedisSentinelPool) {
         Assert.notNull(jedisSentinelPool, "redis连接池注入失败");
         this.jedisSentinelPool = jedisSentinelPool;
     }

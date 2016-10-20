@@ -1,6 +1,7 @@
 package com.xfl.common.redis.impl;
 
 import com.xfl.common.redis.IRedisLists;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 import redis.clients.jedis.BinaryClient;
@@ -26,6 +27,7 @@ public class RedisListsImpl implements IRedisLists {
      * 注入jedisSentinelPool.
      * @param jedisSentinelPool 连接池
      */
+    @Autowired
     public RedisListsImpl(JedisSentinelPool jedisSentinelPool) {
         Assert.notNull(jedisSentinelPool, "redis连接池注入失败");
         this.jedisSentinelPool = jedisSentinelPool;

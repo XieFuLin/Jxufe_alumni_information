@@ -1,6 +1,7 @@
 package com.xfl.common.redis.impl;
 
 import com.xfl.common.redis.IRedisHashes;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 import redis.clients.jedis.Jedis;
@@ -26,6 +27,7 @@ public class RedisHashesImpl implements IRedisHashes {
      * 注入jedisSentinelPool.
      * @param jedisSentinelPool 连接池
      */
+    @Autowired
     public RedisHashesImpl(JedisSentinelPool jedisSentinelPool) {
         Assert.notNull(jedisSentinelPool, "redis连接池注入失败");
         this.jedisSentinelPool = jedisSentinelPool;
