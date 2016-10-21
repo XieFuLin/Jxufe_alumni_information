@@ -13,7 +13,7 @@ import java.util.Set;
  * Sorted Sets中所有的成员都是唯一的，
  * 其分数(score)是可以重复的，即是说一个分数可能会对应多个值。
  */
-public interface IredisSortedSets {
+public interface IRedisSortedSets {
     /**
      * 向集合中增加一条记录,如果这个值已存在，这个值对应的权重将被置为新的权重.
      *

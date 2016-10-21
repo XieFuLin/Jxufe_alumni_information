@@ -1,6 +1,6 @@
 package com.xfl.common.redis.impl;
 
-import com.xfl.common.redis.IredisSortedSets;
+import com.xfl.common.redis.IRedisSortedSets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
@@ -16,7 +16,7 @@ import java.util.Set;
  * description:redis操作SortedSets相关接口实现
  */
 @Repository("redisSortedSets")
-public class RedisSortedSetsImpl implements IredisSortedSets {
+public class RedisSortedSetsImpl implements IRedisSortedSets {
     /**
      * JedisSentinelPool.
      */
