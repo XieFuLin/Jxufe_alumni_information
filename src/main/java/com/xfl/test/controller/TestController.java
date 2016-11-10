@@ -37,7 +37,8 @@ public class TestController extends BaseController {
     @RequestMapping(method = RequestMethod.GET)
     public Response test() {
         log.info("Test");
-        int count = testService.insertTest();
+        log.info("客户的IP是: " + getClientIp(getServletRequest()));
+        System.out.println(getClientIp(getServletRequest()));
         return new Response(ResponseStatusEnum.SUCCESS.getCode(), testService.test());
     }
 }
