@@ -3,6 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <display-name>Jxufe-alumni-information</display-name>
+    <description>江西财经大学校友信息平台</description>
     <context-param>
         <param-name>logbackConfigLocation</param-name>
         <param-value>classpath:/logback/logback.xml</param-value>
@@ -54,4 +56,9 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <!-- 设置默认首页 -->
+    <welcome-file-list>
+        <welcome-file>/index/index.html</welcome-file>
+    </welcome-file-list>
+
 </web-app>
