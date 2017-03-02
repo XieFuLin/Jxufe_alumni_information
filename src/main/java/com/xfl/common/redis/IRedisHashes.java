@@ -76,7 +76,7 @@ public interface IRedisHashes {
     /**
      * 添加对应关系,向Map中put一个新的值，只有在field不存在时才执行.
      * @param key 键值
-     * @param field ap中对应的key
+     * @param field Map中对应的key
      * @param value 值
      * @return 状态码 1成功，0失败field已存
      */
