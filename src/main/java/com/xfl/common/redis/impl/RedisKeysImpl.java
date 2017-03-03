@@ -35,7 +35,7 @@ public class RedisKeysImpl implements IRedisKeys {
     }
     /**
      * 删除所有现有的数据库，而不仅仅是当前选择的一个的键.
-     *
+     *(Redis默认会创建16个数据库,可以通过select index 命令切换,index为数据库的索引)
      * @return 返回OK
      */
     @Override
@@ -45,7 +45,7 @@ public class RedisKeysImpl implements IRedisKeys {
     }
 
     /**
-     * 更改键的名称.
+     * 更改键的名称.(如果新的键存在,则新的键会被覆盖).
      *
      * @param oldkey 旧键值
      * @param newkey 新键值
@@ -58,7 +58,7 @@ public class RedisKeysImpl implements IRedisKeys {
     }
 
     /**
-     * 重命名键，如果新的键不存在.
+     * 重命名键，如果新的键不存在,如果新的键存在,则重命名失败返回0.
      *
      * @param oldkey 旧键值
      * @param newkey 新键值
