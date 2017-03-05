@@ -3,6 +3,7 @@ package com.xfl.test.controller;
 import com.xfl.common.controller.BaseController;
 import com.xfl.common.entity.Response;
 import com.xfl.common.enumeration.ResponseStatusEnum;
+import com.xfl.common.redis.IRedisStrings;
 import com.xfl.test.service.ITestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,11 @@ public class TestController extends BaseController {
      */
     @Resource
     private ITestService testService;
+    /**
+     * 注入redisStrings.
+     */
+    @Resource
+    private IRedisStrings redisStrings;
 
     /**
      * 用于测试.
@@ -39,6 +45,9 @@ public class TestController extends BaseController {
         log.info("Test");
         log.info("客户的IP是: " + getClientIp(getServletRequest()));
         System.out.println(getClientIp(getServletRequest()));
-        return new Response(ResponseStatusEnum.SUCCESS.getCode(), testService.test());
+        log.info(redisStrings.get("test1"));
+        log.info(redisStrings.get("test2"));
+        log.info(redisStrings.get("test3"));
+        return new Response(ResponseStatusEnum.SUCCESS.getCode(), testService.insertTest());
     }
 }
