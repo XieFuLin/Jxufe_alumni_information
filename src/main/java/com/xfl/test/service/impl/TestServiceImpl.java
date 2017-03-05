@@ -2,6 +2,7 @@ package com.xfl.test.service.impl;
 
 import com.xfl.common.repository.ICommonRepository;
 import com.xfl.test.service.ITestService;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -37,10 +38,17 @@ public class TestServiceImpl implements ITestService {
      */
     @Override
     public Integer insertTest() {
-        Map<String, String> parameterMap = new HashMap<>();
-        parameterMap.put("testName", "TestName");
-        Integer count = commonRepository.insert("TestMapper.saveTest", parameterMap);
-      //  int tmp = 1 /0;
+        Integer count = 0;
+        try {
+            Map<String, String> parameterMap = new HashMap<>();
+            parameterMap.put("testName", "TestName");
+            count = commonRepository.insert("TestMapper.saveTest", parameterMap);
+            int tmp = 1 / 0;
+        } catch (DataAccessException e) {
+            System.out.println("FUCK");
+            throw new RuntimeException("事务回滚了");
+        }
+
         return count;
     }
 }
