@@ -15,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.nio.charset.Charset;
-import java.util.Map;
 
 /**
  * Created by XFL.
@@ -46,10 +45,11 @@ public class RestTester {
      *
      * @return 返回请求结果
      */
-    public ResponseEntity<String> get() {
+    public <T> T get(Class<T> cls) {
         String fullUrl = UriComponentsBuilder.fromHttpUrl(url).queryParams(params).build().toUriString();
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForEntity(fullUrl, String.class);
+        ResponseEntity<T> resultEntity = restTemplate.getForEntity(fullUrl, cls);
+        return resultEntity.getBody();
     }
 
     /**
@@ -57,10 +57,11 @@ public class RestTester {
      *
      * @return 返回请求结果
      */
-    public ResponseEntity<String> post() {
+    public <T> T post(Class<T> cls) {
         String fullUrl = UriComponentsBuilder.fromHttpUrl(url).build().toUriString();
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForEntity(fullUrl, params, String.class);
+        ResponseEntity<T> resultEntity = restTemplate.postForEntity(fullUrl, params, cls);
+        return resultEntity.getBody();
     }
 
     /**
@@ -68,12 +69,11 @@ public class RestTester {
      *
      * @param url      绝对地址
      * @param method   请求方式
-     * @param params   请求参数
      * @param bodyType 返回类型
      * @param <T>      返回类型
      * @return 返回结果(响应体)
      */
-    public <T> T exchange(String url, HttpMethod method, Map<String, Object> params, Class<T> bodyType) {
+    public <T> T exchange(String url, HttpMethod method, Class<T> bodyType) {
         // 请求头
         HttpHeaders headers = new HttpHeaders();
         MimeType mimeType = MimeTypeUtils.parseMimeType("application/json");
@@ -84,20 +84,16 @@ public class RestTester {
         ObjectMapper mapper = new ObjectMapper();
         String str = null;
         try {
-            if (params != null) {
+            if (!params.isEmpty()) {
                 str = mapper.writeValueAsString(params);
             }
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-
         // 发送请求
         HttpEntity<String> entity = new HttpEntity<>(str, headers);
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<T> obj = restTemplate.exchange(url, method, entity, bodyType);
-        if (obj != null) {
-            return obj.getBody();
-        }
-        return null;
+        ResponseEntity<T> resultEntity = restTemplate.exchange(url, method, entity, bodyType);
+        return resultEntity.getBody();
     }
 }
