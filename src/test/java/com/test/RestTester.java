@@ -64,7 +64,7 @@ public class RestTester {
     }
 
     /**
-     * 发送/获取 服务端数据.
+     * 发送/获取 服务端数据(主要用于解决发送put,delete方法无返回值问题).
      *
      * @param url      绝对地址
      * @param method   请求方式
