@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,8 +28,8 @@ public class TestServiceImpl implements ITestService {
      * @return 返回测试响应结果
      */
     @Override
-    public Map<String, Object> test() {
-        return commonRepository.selectOne("TestMapper.test");
+    public List<Map<String, Object>> test() {
+        return commonRepository.selectList("TestMapper.test");
     }
 
     /**

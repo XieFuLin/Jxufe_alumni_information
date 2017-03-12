@@ -1,5 +1,6 @@
 package com.xfl.test.service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,7 +13,7 @@ public interface ITestService {
      * 测试.
      * @return 返回响应结果
      */
-    Map<String, Object> test();
+    List<Map<String, Object>> test();
 
     /**
      * 测试数据插入.
