@@ -3,7 +3,9 @@
 <mapper namespace="TestMapper">
     <!-- 获取数据测试 -->
     <select id="test" resultType="Map">
-    SELECT * FROM test LIMIT 1
+        SELECT *
+        FROM test
+        LIMIT 0, 20
     </select>
     <!-- 插入数据测试 -->
     <insert id="saveTest" parameterType="Map" useGeneratedKeys="true" keyProperty="testId">
