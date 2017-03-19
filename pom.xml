@@ -27,6 +27,7 @@
         <logback-ext-spring.version>0.1.4</logback-ext-spring.version>
         <junit.version>4.12</junit.version>
         <jdk.version>1.8</jdk.version>
+        <httpclient.version>4.5.3</httpclient.version>
     </properties>
     <dependencies>
         <dependency>
@@ -187,6 +188,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
             <version>${commons-pool2.version}</version>
+        </dependency>
+        <!-- apache HttpClient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
         </dependency>
     </dependencies>
     <build>
