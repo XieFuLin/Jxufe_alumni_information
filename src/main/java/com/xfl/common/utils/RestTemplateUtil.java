@@ -1,4 +1,4 @@
-package com.test;
+package com.xfl.common.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,13 +19,21 @@ import java.nio.charset.Charset;
 /**
  * Created by XFL.
  * time on 2017/3/8 23:37
- * description:测试工具类
+ * description:RestTemplate 工具,用于向服务端发送请求.
  */
-public class RestTester {
+public class RestTemplateUtil {
     private final String url;
-
+    /**
+     * 请求参数(一般是Post方法,所需提交的数据).
+     */
     private final MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 
+    /**
+     * 设置请求参数.
+     *
+     * @param key   键值
+     * @param value 值
+     */
     public void set(String key, String value) {
         params.add(key, value);
     }
@@ -35,15 +43,16 @@ public class RestTester {
      *
      * @param url 请求地址
      */
-    public RestTester(String url) {
+    public RestTemplateUtil(String url) {
         super();
         this.url = url;
     }
 
     /**
      * 发送get请求.
-     *
-     * @return 返回请求结果
+     * @param cls 返回结果数据类型
+     * @param <T> 返回结果类型
+     * @return 返回结果
      */
     public <T> T get(Class<T> cls) {
         String fullUrl = UriComponentsBuilder.fromHttpUrl(url).queryParams(params).build().toUriString();
@@ -54,8 +63,9 @@ public class RestTester {
 
     /**
      * 发送post请求.
-     *
-     * @return 返回请求结果
+     * @param cls 返回数据类型
+     * @param <T> 返回类型
+     * @return 发挥结果
      */
     public <T> T post(Class<T> cls) {
         String fullUrl = UriComponentsBuilder.fromHttpUrl(url).build().toUriString();

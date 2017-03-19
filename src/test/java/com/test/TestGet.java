@@ -3,6 +3,7 @@ package com.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xfl.common.entity.Response;
+import com.xfl.common.utils.RestTemplateUtil;
 
 /**
  * Created by XFL
@@ -11,7 +12,7 @@ import com.xfl.common.entity.Response;
  */
 public class TestGet {
     public static void main(String[] args) {
-        RestTester restTester = new RestTester("http://localhost:8080/Test");
+        RestTemplateUtil restTester = new RestTemplateUtil("http://localhost:8080/Test");
         String result = restTester.get(String.class);
         ObjectMapper objectMapper = new ObjectMapper();
         try {
