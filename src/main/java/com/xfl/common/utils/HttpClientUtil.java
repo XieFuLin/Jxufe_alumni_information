@@ -75,7 +75,7 @@ public class HttpClientUtil {
         T resultObject = null;
         httpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
-        List<NameValuePair> formParams = new ArrayList<NameValuePair>();
+        List<NameValuePair> formParams = new ArrayList<>();
         Set<String> keySet = params.keySet();
         for (String key : keySet) {
             formParams.add(new BasicNameValuePair(key, params.get(key)));
@@ -106,7 +106,7 @@ public class HttpClientUtil {
      * @throws IOException
      */
     private <T> T httpExecute(Class<T> cls, HttpUriRequest httpMethod) throws IOException {
-        T resultObject = null;
+        T resultObject;
         HttpResponse httpResponse = httpClient.execute(httpMethod);
         HttpEntity entity = httpResponse.getEntity();
         String resultData = EntityUtils.toString(entity);
