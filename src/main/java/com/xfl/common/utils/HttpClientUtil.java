@@ -103,7 +103,7 @@ public class HttpClientUtil {
      * @param httpMethod 请求方式 HttpPost或者HttpGet
      * @param <T>        返回结果泛型
      * @return 返回请求结果
-     * @throws IOException
+     * @throws IOException 异常
      */
     private <T> T httpExecute(Class<T> cls, HttpUriRequest httpMethod) throws IOException {
         T resultObject;
