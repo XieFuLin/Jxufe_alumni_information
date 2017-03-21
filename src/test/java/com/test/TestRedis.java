@@ -5,12 +5,15 @@ import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisSentinelPool;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public class TestRedis {
+    private static JedisSentinelPool jedisSentinelPool = null;
 
-    public static void main(String[] args) {
+    /**
+     *  初始化Redis连接池.
+     */
+    static {
         JedisPoolConfig config = new JedisPoolConfig();
         //设置最大连接总数
         config.setMaxTotal(300);
@@ -39,15 +42,45 @@ public class TestRedis {
         config.setBlockWhenExhausted(true);
         //对象空闲多久后逐出, 当空闲时间>该值 且 空闲连接>最大空闲数 时直接逐出,不再根据MinEvictableIdleTimeMillis判断  (默认逐出策略)
         config.setSoftMinEvictableIdleTimeMillis(1800000);
-        //供单机模式使用
-//		JedisPool pool = new JedisPool(config, "192.168.1.4", 20223, 10000, "hyb2016", 0);
         Set<String> set = new HashSet<>();
         //连接地址以及端口号,有多个就一次增加
         set.add("192.168.1.101:26379");
-        JedisSentinelPool jedisSentinelPool = new JedisSentinelPool("mymaster", set, config);
-        //获取Jedis
-        Jedis jedis = jedisSentinelPool.getResource();
-        Map test = jedis.hgetAll("hash");
+        jedisSentinelPool = new JedisSentinelPool("mymaster", set, config);
     }
 
+    /**
+     * 获取Jedis实例
+     *
+     * @return 返回Jedis实例
+     */
+    public synchronized static Jedis getJedis() {
+        try {
+            if (jedisSentinelPool != null) {
+                return jedisSentinelPool.getResource();
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 释放资源.
+     *
+     * @param jedis jedis
+     */
+    public static void releaseResource(final Jedis jedis) {
+        if (jedis != null) {
+            jedis.close();
+            jedisSentinelPool.destroy();
+        }
+    }
+
+    public static void main(String[] args) {
+        Jedis jedis = getJedis();
+        jedis.hgetAll("hash");
+        releaseResource(jedis);
+    }
 }
