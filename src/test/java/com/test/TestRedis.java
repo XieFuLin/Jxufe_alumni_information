@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TestRedis {
+    /**
+     * 连接次.
+     */
     private static JedisSentinelPool jedisSentinelPool = null;
 
     /**
@@ -49,7 +52,7 @@ public class TestRedis {
     }
 
     /**
-     * 获取Jedis实例
+     * 获取Jedis实例.
      *
      * @return 返回Jedis实例
      */
